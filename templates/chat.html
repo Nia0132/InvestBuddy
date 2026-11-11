@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ kb.bot_name }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body style="--primary: {{ kb.color }};">
+  <main class="chat-card">
+    <header class="chat-header">
+      <span class="avatar">{{ kb.avatar }}</span>
+      <div><h1>{{ kb.bot_name }}</h1><p>{{ kb.tagline }}</p></div>
+    </header>
+    <div id="messages" class="messages" aria-live="polite"></div>
+    <div class="suggestions">
+      {% for s in kb.suggestions %}<button type="button" class="chip">{{ s }}</button>{% endfor %}
+    </div>
+    <form id="chat-form" class="chat-form" autocomplete="off">
+      <input id="chat-input" placeholder="Ketik pesan..." maxlength="500" required>
+      <button type="submit">Kirim</button>
+    </form>
+  </main>
+  <script>
+    const GREETING = {{ greeting | tojson }};
+    const AVATAR = {{ kb.avatar | tojson }};
+  </script>
+  <script src="{{ url_for('static', filename='chat.js') }}"></script>
+</body>
+</html>
